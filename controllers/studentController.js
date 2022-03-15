@@ -1,12 +1,14 @@
 const { Student, Course } = require('../models');
 
 // TODO: Create an aggregate function to get the number of students overall
-const headCount = async () =>
+const headCount = async () => {
   Student.aggregate()
   .count('studentCount')
     // Your code here
     .then((numberOfStudents) => numberOfStudents);
+}
 
+const grade = async (studentId) => {
   Student.aggregate([
     {
       $unwind: '$assignments',
@@ -21,7 +23,7 @@ const headCount = async () =>
       }
     },
   ]);
-
+}
 module.exports = {
   // Get all students
   getStudents(req, res) {
